@@ -20,4 +20,7 @@ content-type: application/json
 
 
 ### Get an item by id 
-GET http://localhost:3000/item/3
+GET http://localhost:3000/items/16
+
+### DELETE item by id 
+DELETE http://localhost:3000/items/2

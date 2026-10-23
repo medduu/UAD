@@ -6,7 +6,8 @@ const port = 3000;
 const items = [
     {id: 1, name: 'Item 1'},
     {id: 2, name: 'Item 2'},
-    {id: 3, name: 'Item 3'},
+    {id: 6, name: 'Item 6'},
+    {id: 8, name: 'Item 8'},
 ];
 
 const notFound = (res) => {
@@ -47,7 +48,12 @@ const server = http.createServer((req, res) => {
         });
         req.on('end', () => {
             console.log('POST data:', data);
-            res.end();
+            // Create no object based on posed json data
+            const NewItem = JSON.parse(data);
+            newItem.id = items[items.length-1].id + 1;
+            items.push(JSON.parse(data));
+            res.writeHead(201, {'Content-Type': 'application/json'});
+            res.end('{"message": "Data received"}');
         });
         
     // Default 404 error response
