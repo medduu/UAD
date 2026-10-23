@@ -40,6 +40,15 @@ const server = http.createServer((req, res) => {
             res.write(JSON.stringify(items));
         }
         res.end();
+    }   else if (req.method === 'POST' && resource === 'items') {
+        let data ='';
+        req.on('data', chunk => {
+            data += chunk.toString();
+        });
+        req.on('end', () => {
+            console.log('POST data:', data);
+            res.end();
+        });
         
     // Default 404 error response
     } else {

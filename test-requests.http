@@ -12,6 +12,12 @@ Get http://localhost:3000/something-not-found
 
 POST http://localhost:3000/
 
-### Get an item by id 
+### Post new item
+POST http://localhost:3000/items
+content-type: application/json
 
-GET http://localhost:3000/item3
+{"name": "postattu itemi"}
+
+
+### Get an item by id 
+GET http://localhost:3000/item/3
