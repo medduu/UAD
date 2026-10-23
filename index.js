@@ -6,6 +6,8 @@ const port = 3000;
 const items = [
     {id: 1, name: 'Item 1'},
     {id: 2, name: 'Item 2'},
+    {id: 3, name: 'Item 3'},
+
 ];
 
 const server = http.createServer((req, res) => {
@@ -21,12 +23,13 @@ const server = http.createServer((req, res) => {
     }   else if (req.method === 'GET' && resource === '/items') {
         res.writeHead(200, {'Content-Type': 'application/json'});
         if (id) {
-            res.write(JSON.stringify(items[0]))
+            items.find(items) => (return id == items.id)
+            res.write(JSON.stringify(items[id-1]))
         }   else {
             res.write(JSON.stringify(items));
         }
         res.end();
-    // Default 404 erroe response
+    // Default 404 error response
     }   else {
         res.write(JSON.stringify(items));
         res.writeHead(404, {'Content-Type': 'text/html'});
