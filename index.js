@@ -23,6 +23,7 @@ const server = http.createServer((req, res) => {
     if (req.url === '/') {
         res.writeHead(200, {'Content-Type': 'text/html'});
         res.end('<p>Tervetuloa esimerkkirajapintaan</p>');
+        return; // <--- FIX 1: Added return to stop execution here!
         
     } else if (req.method === 'GET' && resource === 'items') {
         
@@ -48,12 +49,14 @@ const server = http.createServer((req, res) => {
         });
         req.on('end', () => {
             console.log('POST data:', data);
-            // Create no object based on posed json data
-            const NewItem = JSON.parse(data);
+            
+            // FIX 2: Fixed case-sensitivity typo (NewItem -> newItem)
+            const newItem = JSON.parse(data);
             newItem.id = items[items.length-1].id + 1;
-            items.push(JSON.parse(data));
+            items.push(newItem); // Pushing the object with its new ID
+            
             res.writeHead(201, {'Content-Type': 'application/json'});
-            res.end('{"message": "Data received"}');
+            res.end(JSON.stringify({ message: "Data received", item: newItem }));
         });
         
     // Default 404 error response
