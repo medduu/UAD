@@ -10,6 +10,10 @@ const items = [
 
 ];
 
+const notFound = (response) => {
+        res.writeHead(404, {'Content-Type': 'text/html'});
+        res.end('<h1>404 - Page Not Found</h1>');
+
 const server = http.createServer((req, res) => {
     console.log('request', req.url, req.method, req.headers);
     // split rquest url to resource name and parameter
@@ -31,9 +35,7 @@ const server = http.createServer((req, res) => {
         res.end();
     // Default 404 error response
     }   else {
-        res.write(JSON.stringify(items));
-        res.writeHead(404, {'Content-Type': 'text/html'});
-        res.end('<h1>404 - Page Not Found</h1>');
+        notFound(res);  
     }
 
 });
