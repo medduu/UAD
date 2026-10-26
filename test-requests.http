@@ -1,26 +1,55 @@
 # Test http requests for my api
 
 ### GET server root
-
 GET http://localhost:3000/
 
-### Get not found 404
+### GET not found (404)
+GET http://localhost:3000/something-not-found
 
-Get http://localhost:3000/something-not-found
+### GET all items
+GET http://localhost:3000/items
 
-### Post server root
+### GET item by id
+GET http://localhost:3000/items/8
 
-POST http://localhost:3000/
+###D GET item that does not exist (404)
+GET http://localhost:3000/items/999
 
-### Post new item
+### POST new item (201)
 POST http://localhost:3000/items
 content-type: application/json
 
 {"name": "postattu itemi"}
 
+### POST invalid JSON (400)
+POST http://localhost:3000/items
+content-type: application/json
 
-### Get an item by id 
-GET http://localhost:3000/items/8
+{"name": rikki
 
-### DELETE item by id 
-DELETE http://localhost:3000/items/2
+### POST without name (400)
+POST http://localhost:3000/items
+content-type: application/json
+
+{}
+
+### PUT update item (200)
+PUT http://localhost:3000/items/2
+content-type: application/json
+
+{"name": "muokattu itemi"}
+
+### PUT item that does not exist (404)
+PUT http://localhost:3000/items/999
+content-type: application/json
+
+{"name": "ei löydy"}
+
+### DELETE item by id (204)
+DELETE http://localhost:3000/items/6
+
+### DELETE item that does not exist (404)
+DELETE http://localhost:3000/items/999
+
+### Method not allowed (405)
+PATCH http://localhost:3000/items/1
